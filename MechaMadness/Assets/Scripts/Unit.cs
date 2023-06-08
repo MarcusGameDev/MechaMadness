@@ -1,70 +1,93 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using System;
+using UnityEngine.Events;
+
 
 public class Unit : MonoBehaviour
 {
-    NavMeshAgent Agent;
+    // Values for the Unit
+    public float UnitHealth = 100;
 
     public GameObject Target;
+    public event Action<GameObject> OnEnemyFound;
 
-    public float ShootingDistance = 1;
-    public Vector3 distance;
+    public Faction UnitFaction;
+    List<Unit> UnitList = new List<Unit>();
+    List<Unit> PotentialEnemies = new List<Unit>();
 
-    public GameObject Bullet;
-    public Transform ShootPosition;
-    bool canshoot = true;
-    public float ShootTimer = 1;
+    //Death Info
+    public event Action<GameObject> OnDeath;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Agent = GetComponent<NavMeshAgent>();
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
         if(Target != null)
         {
-                // Calcs to see if the player should be chasing its target
-           distance = new Vector3(transform.position.x - Target.transform.position.x, transform.position.y - Target.transform.position.y, transform.position.z - Target.transform.position.z);
-           if (distance.x < 0) distance.x *= -1;
-           if (distance.z < 0) distance.z *= -1;
+            OnEnemyFound?.Invoke(Target);
+        }
 
-            if (distance.x > ShootingDistance || distance.z > ShootingDistance)
-            {
-                // Player moves towards their target
-                Agent.isStopped = false;
-                Agent.destination = Target.transform.position;
-            }
-            else
-            {
-                // PLayer Starts Shooting
-                if (canshoot)
-                {
-                    StartCoroutine(Shoot());
-                }
-              
-
-                // Player stops movement
-                Agent.isStopped = true;
-            }
-          
+       TargetCheck();
+    }
+    
+    public void TargetCheck()
+    {
+        if (Target == null)
+        {
+            // Find Enemies
+            FindEnemy();
+            // Find the ClosestEnemies
         }
     }
 
-    public IEnumerator Shoot()
+    public void TargetDied(GameObject target)
     {
-        canshoot = false;
+        // Unsubscribes from the previous target, then goes to find the next target
+        Target.GetComponent<Unit>().OnDeath -= TargetDied;
+        TargetCheck();
+    }
 
-        GameObject bulletInstance = Instantiate(Bullet, ShootPosition.position, ShootPosition.rotation);
-        Debug.Log("Shoot");
+    public void FindEnemy()
+    {
+        // Creates a list of potential enemies
+       UnitList.AddRange(GameObject.FindObjectsOfType<Unit>());
 
-        yield return new WaitForSeconds(ShootTimer);
+        // Cuts down List to only include enemies
+        foreach (Unit dude in UnitList)
+        {
+            if (dude.UnitFaction != UnitFaction)
+            {
+             PotentialEnemies.Add(dude);
+            }
+        }
 
-        canshoot = true;
+        // Select an enemy
+        Unit chosenEnemy;
+        chosenEnemy = PotentialEnemies[UnityEngine.Random.Range(0, PotentialEnemies.Count)];
+
+
+       // Debug.Log("Enemy identified as " + chosenEnemy.name);
+        // Set the Chosen Enemy as the target for the player
+        Target = chosenEnemy.gameObject;
+
+
+        // Subcribe to Enemies "On Death Event"
+        Target.GetComponent<Unit>().OnDeath += TargetDied;
+
+        // Broadcast new Target (Closest Enemy)
+        OnEnemyFound?.Invoke(Target);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        UnitHealth -= damage;
+
+        if(UnitHealth <= 0)
+        {
+            // Death Event (To update their target)
+            OnDeath?.Invoke(this.gameObject);
+
+        }
     }
 }
 

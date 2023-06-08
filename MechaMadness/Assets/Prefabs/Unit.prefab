@@ -247,7 +247,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 700
+  m_VersionIndex: 742
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -386,6 +386,8 @@ GameObject:
   - component: {fileID: 8502043054267844271}
   - component: {fileID: 1631401434}
   - component: {fileID: 1631401435}
+  - component: {fileID: 2136422247}
+  - component: {fileID: 2136422248}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -484,11 +486,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c7a218f29ef3446a7107651bfccec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitHealth: 100
   Target: {fileID: 0}
-  ShootingDistance: 1
-  distance: {x: 0, y: 0, z: 0}
-  Bullet: {fileID: 0}
-  ShootPosition: {fileID: 9059298483165341321}
+  UnitFaction: 0
+  PotentialEnemies: []
 --- !u!195 &1631401435
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -511,6 +512,51 @@ NavMeshAgent:
   m_BaseOffset: 0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2136422247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619841681976905483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2777f6ae77a50de40b16113e946c1dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  stopDistance: 5
+  OnInRange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2136422248}
+        m_TargetAssemblyTypeName: UnitShooting, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2136422248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619841681976905483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e3e644a7ba4254b9a950b9826fb05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 8554200459079549444, guid: d0d4096a617577a488c6c5b58eadd83b, type: 3}
+  bulletSpeed: 50
+  ShootPosition: {fileID: 9059298483165341321}
+  ShootTimer: 3
 --- !u!1 &8737043664389065616
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +805,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 703
+  m_VersionIndex: 745
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
