@@ -57,10 +57,11 @@
     <Compile Include="Assets\Scripts\UnitShooting.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Enum HOlders\ThisFaction.cs" />
+    <Compile Include="Assets\Scripts\ThisFaction.cs" />
     <Compile Include="Assets\Scripts\UnitDetection.cs" />
     <Compile Include="Assets\Scripts\UnitMovement.cs" />
     <Compile Include="Assets\Scripts\Enum HOlders\Factions.cs" />
+    <Compile Include="Assets\Scripts\Example.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

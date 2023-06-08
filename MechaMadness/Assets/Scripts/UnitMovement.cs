@@ -19,7 +19,7 @@ public class UnitMovement : MonoBehaviour
     {
         Agent = GetComponent<NavMeshAgent>();
 
-        // Subscribe to the TargetSet event
+        // Subscribe to the TargetSet event                         ~~  Disable this to remove dependencies on other scripts ~~
         Unit unit = GetComponent<Unit>();
         unit.OnEnemyFound += TargetSet;
     
@@ -43,6 +43,9 @@ public class UnitMovement : MonoBehaviour
             }
             else
             {
+                // Face the Target
+                transform.LookAt(Target.transform.position);
+
                 // Player stops movement
                 Agent.isStopped = true;
 

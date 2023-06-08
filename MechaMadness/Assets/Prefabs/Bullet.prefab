@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 809463733207802666}
   - component: {fileID: 1168992606888228500}
   - component: {fileID: 4870645883397572874}
-  m_Layer: 0
+  - component: {fileID: 3478794549672251203}
+  - component: {fileID: 1488067781162130322}
+  m_Layer: 3
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,3 +115,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3478794549672251203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554200459079549444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8159fb06d6ab9474ea3a7e43d38c0826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  projectileLife: 10
+--- !u!114 &1488067781162130322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554200459079549444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4b2800b775f5d459cfe492b19c3ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 0

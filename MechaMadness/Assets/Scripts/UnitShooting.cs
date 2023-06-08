@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UnitShooting : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class UnitShooting : MonoBehaviour
         {
             GameObject bulletInstance = Instantiate(Bullet, ShootPosition.position, ShootPosition.rotation);
             if (bulletInstance.GetComponent<Rigidbody>() != null) { bulletInstance.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed); }
+
+            // Change the Bullets "Factions" component to This units "Faction"
+            bulletInstance.GetComponent<Factions>().faction = GetComponent<Factions>().faction;
+
+
             //Debug.Log("Shoot");
             canshoot = false;
         }

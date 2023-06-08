@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
     public float damage = 10;
 
     public float projectileLife = 10;
+    
+    Faction bulletFaction;
 
 
     // Start is called before the first frame update
@@ -20,11 +22,13 @@ public class Projectile : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        // Inherit Faction from the parent Unit.
-        // Define what an enemy is (or a possible enemy target)
-
+        //  the other object has the "Unit Script & Their faction is different from this objects faction. Run the code.
+        if(other.gameObject.GetComponent<Unit>() != null && other.gameObject.GetComponent<Factions>().faction != GetComponent<Factions>().faction)
+        {
+            other.gameObject.GetComponent<Unit>().TakeDamage(damage);
+        }
 
         // If bullet hits an enemy
         // Deal damage to the target
@@ -33,5 +37,10 @@ public class Projectile : MonoBehaviour
 
         // After hitting anything, SelfDelete();
         SelfDelete();
+    }
+
+    public void GetFaction(Faction spawnerFaction)
+    {
+        bulletFaction = spawnerFaction;
     }
 }

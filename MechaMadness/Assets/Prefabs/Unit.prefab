@@ -247,7 +247,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 742
+  m_VersionIndex: 748
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: 1631401435}
   - component: {fileID: 2136422247}
   - component: {fileID: 2136422248}
+  - component: {fileID: 6298169049377193749}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -488,8 +489,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitHealth: 100
   Target: {fileID: 0}
-  UnitFaction: 0
-  PotentialEnemies: []
 --- !u!195 &1631401435
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -557,6 +556,19 @@ MonoBehaviour:
   bulletSpeed: 50
   ShootPosition: {fileID: 9059298483165341321}
   ShootTimer: 3
+--- !u!114 &6298169049377193749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619841681976905483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4b2800b775f5d459cfe492b19c3ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 1
 --- !u!1 &8737043664389065616
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +817,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 745
+  m_VersionIndex: 751
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -895,7 +907,7 @@ MeshCollider:
   m_GameObject: {fileID: 8737043664389065616}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
